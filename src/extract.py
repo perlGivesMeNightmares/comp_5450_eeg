@@ -34,14 +34,14 @@ def filter_by_gesture(data, gesture):
 	return lst
 
 def main():
-	gesture_types = range(1, 8)
+	gesture_types = [0]  # range(1, 8)
 
 	basepath = os.path.dirname(__file__)
 	fp = os.path.abspath(os.path.join(basepath, "..", "data"))
 	subdirectories = [name for name in os.listdir(fp) if os.path.isdir(os.path.join(fp, name))]
 	for dir_idx, directory in enumerate(subdirectories):
-		if dir_idx > 0:
-			return
+		# if dir_idx != 0:
+		# 	continue
 		sd_fp = os.path.abspath(os.path.join(basepath, "..", "data", str(directory)))
 		subfiles = os.listdir(sd_fp)
 		for file_name in subfiles:	
@@ -51,11 +51,8 @@ def main():
 			for gest in gesture_types:
 				result = filter_by_gesture(txt_data, gest)
 				if len(result) > 0:
-					success = write_mat_data(result, directory, file_name, gest)
+					success = write_mat_data(result, directory, file_name, gest)		
 
-				
-
-	print(subdirectories)
 	return
 
 if __name__ == "__main__":
