@@ -6,9 +6,8 @@ import numpy as np
 import scipy.io
 from keras.utils import to_categorical
 from keras.models import Sequential
-from keras.layers import Dense, Conv2D, Flatten
-
-classes = ['gesture_'+str(i) for i in range(1,8)]
+from keras.layers import Dense, Conv2D, Flatten, MaxPooling2D, Dropout
+from keras import regularizers
 
 
 def main():
@@ -34,12 +33,6 @@ def build_cnn(X_train, y_train, X_test=None, y_test=None):
 	X_train = X_train.reshape(len(X_train),1000,64,1)
 	X_test = X_test.reshape(len(X_test),1000,64,1)
 
-	# plot the first image in the dataset
-	# plt.imshow(X_train[0])
-	# plt.show()
-	# print(X_train[0])
-	# return
-
 	# one-hot encode target column
 	y_train = to_categorical(y_train)
 	y_test = to_categorical(y_test)
@@ -47,16 +40,18 @@ def build_cnn(X_train, y_train, X_test=None, y_test=None):
 	#create model
 	model = Sequential()
 	#add model layers
-	model.add(Conv2D(32, kernel_size=3, activation='relu', input_shape=(1000,64,1)))
-	model.add(Conv2D(64, kernel_size=3, activation='relu'))
+	model.add(Conv2D(64, kernel_size=3, activation='relu', input_shape=(1000,64,1)))
+	model.add(Dropout(0.2))
+	model.add(Conv2D(32, kernel_size=3, activation='relu'))
+	model.add(MaxPooling2D(pool_size=(2, 2)))
 	model.add(Flatten())
-	model.add(Dense(6, activation='softmax'))
+	model.add(Dense(6, activation='softmax', kernel_regularizer=regularizers.l2(0.003)))
 
 	#compile model using accuracy to measure model performance
 	model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 	#train the model
-	model.fit(X_train, y_train, batch_size=8, validation_data=(X_test, y_test), epochs=8)
+	model.fit(X_train, y_train, batch_size=8, validation_data=(X_test, y_test), epochs=2)
 	
 	# model.predict(X_test[:4])
 
