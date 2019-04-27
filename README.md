@@ -15,3 +15,7 @@ If you haven't already, install [python](https://www.python.org/downloads/), [pi
 
 CD into your project directory and run  ```pip install -r requirements.txt```
 You can run ```pip freeze``` to confirm your packages were installed correctly
+
+## Required Setup
+For space reasons, much of the data is excluded. Add the additional data to the data folder.
+You must also drop in an "images" directory with the relevant images.

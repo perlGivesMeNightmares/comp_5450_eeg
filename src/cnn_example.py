@@ -9,8 +9,7 @@ def test_gpu():
 	K.tensorflow_backend._get_available_gpus()
 
 def main():
-	test_gpu()
-	return
+	# test_gpu()
 	#download mnist data and split into train and test sets
 	(X_train, y_train), (X_test, y_test) = mnist.load_data()
 
