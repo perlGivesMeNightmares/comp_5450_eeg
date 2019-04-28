@@ -18,4 +18,6 @@ You can run ```pip freeze``` to confirm your packages were installed correctly
 
 ## Required Setup
 For space reasons, much of the data is excluded. Add the additional data to the data folder.
-You must also drop in an "images" directory with the relevant images.
+You must also drop in an "images" directory with the relevant images. To get the visualization tools
+to work on a Windows OS, you must download the msi from https://graphviz.gitlab.io/_pages/Download/Download_windows.html
+and add it to your path.

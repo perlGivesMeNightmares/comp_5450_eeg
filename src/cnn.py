@@ -4,12 +4,12 @@ from random import Random, shuffle
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.io
-from keras.utils import to_categorical
+from keras.utils import to_categorical, plot_model
 from keras.models import Sequential
 from keras.layers import Dense, Conv2D, Flatten, MaxPooling2D, Dropout
 from keras import regularizers
 
-
+# highest accuracy: 38%
 def main():
 	try:
 		data = scipy.io.loadmat('../images/GestureData.mat')['B']
@@ -51,7 +51,14 @@ def build_cnn(X_train, y_train, X_test=None, y_test=None):
 	model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 	#train the model
-	model.fit(X_train, y_train, batch_size=8, validation_data=(X_test, y_test), epochs=2)
+	model.fit(X_train, y_train, batch_size=16, validation_data=(X_test, y_test), epochs=3)
+
+	try:
+		plot_model(model, to_file='./model.png')
+		model.save('./')
+	except Exception:
+		model.save('./')
+
 	
 	# model.predict(X_test[:4])
 
