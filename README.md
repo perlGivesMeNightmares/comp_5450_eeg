@@ -21,3 +21,6 @@ For space reasons, much of the data is excluded. Add the additional data to the 
 You must also drop in an "images" directory with the relevant images. To get the visualization tools
 to work on a Windows OS, you must download the msi from https://graphviz.gitlab.io/_pages/Download/Download_windows.html
 and add it to your path.
+
+## Images
+The images were produced using a matlab script to transform the data. It can be obtained by request.

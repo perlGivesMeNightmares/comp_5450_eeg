@@ -52,7 +52,7 @@ def build_cnn(X_train, y_train, X_test=None, y_test=None):
 	model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 	#train the model
-	history = model.fit(X_train, y_train, batch_size=16, validation_data=(X_test, y_test), epochs=4)
+	history = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=4)
 
 	# Plot training & validation accuracy values
 	plt.plot(history.history['acc'])
